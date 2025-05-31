@@ -1,13 +1,13 @@
 "use client";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useRef, useState } from "react";
-import { Question } from "@/lib/leetcode_graphql/get_user_solutions";
+import { QuestionMetadata } from "@/lib/leetcode_graphql/get_user_solutions";
 
 
 export default function Page() {
     const inputRef = useRef<HTMLInputElement>(null);
     const [output, setOutput] = useState("");
-    const [questions, setQuestions] = useState<Question[]>([]);
+    const [questions, setQuestions] = useState<QuestionMetadata[]>([]);
 
     async function onSubmit() {
         setOutput(""); // Clear previous output
@@ -46,7 +46,7 @@ export default function Page() {
             const edges = parsedData?.data?.ugcArticleUserSolutionArticles?.edges;
 
             if (Array.isArray(edges)) {
-                setQuestions(edges.map((edge: { node: Question }) => edge.node));
+                setQuestions(edges.map((edge: { node: QuestionMetadata }) => edge.node));
             } else {
                 setOutput("No solutions found for the given user.");
             }
@@ -80,7 +80,7 @@ export default function Page() {
                 {questions.map((question) => (
                     <div key={question.topicId} className="border border-2 border-dark rounded p-3 mb-3">
                         <a
-                        href={`/solution?topicId=${question.topicId}`}
+                        href={`/solution?topicId=${question.topicId}&questionSlug=${question.questionSlug}&questionTitle=${encodeURIComponent(question.questionTitle)}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         >

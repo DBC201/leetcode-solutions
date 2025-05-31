@@ -65,7 +65,7 @@ export function createBody(first: number, username: string): Body {
     };
 }
 
-export interface Question {
+export interface QuestionMetadata {
     topicId: string;
     uuid: string;
     title: string;
@@ -87,7 +87,7 @@ export interface UserSolutions {
             pageInfo: {
                 hasNextPage: boolean;
             };
-            edges: Array<Question>;
+            edges: Array<QuestionMetadata>;
         };
     };
 };
