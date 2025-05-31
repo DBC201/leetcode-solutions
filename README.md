@@ -1,5 +1,8 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## Telemetry
+Next.js collects anonymous telemetry data about general usage. You can opt out of telemetry by running `npx next telemetry disable` or by setting the environment variable `NEXT_TELEMETRY_DISABLED=1`.
+
 ## Getting Started
 
 First, run the development server:
