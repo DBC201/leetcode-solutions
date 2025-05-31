@@ -109,7 +109,7 @@ export default function Page() {
               rel="noopener noreferrer"
             >
               <h3>
-                {question.questionTitle} – {question.title}
+                {question.questionTitle} - {question.title}
               </h3>
             </a>
           </div>
