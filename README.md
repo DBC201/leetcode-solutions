@@ -1,10 +1,13 @@
 # leetcode-solutions
+
+A simple Next.js app to view a user's LeetCode solutions. Simply enter the leetcode username. No authentication required.
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Telemetry
 Next.js collects anonymous telemetry data about general usage. You can opt out of telemetry by running `npx next telemetry disable` or by setting the environment variable `NEXT_TELEMETRY_DISABLED=1`.
 
-## Why? Can you not already see your solutions on LeetCode?
+## Why? Doesn't leetcode already show solutions?
 I don't like the UI, it's not fast enough and not mobile friendly. Perhaps fetching solutions like this is against LeetCode's policy, but they are my solutions are they not? Until leetcode sends me a cease and desist letter, this project will continue to exist.
 
 ## Getting Started
