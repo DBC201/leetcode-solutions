@@ -13,8 +13,8 @@ export interface Body {
 export function createBody(topicId: string): Body {
   return {
     operationName: "ugcArticleSolutionArticle",
-    query: `query ugcArticleSolutionArticle($uuid: String!) {
-      ugcArticleSolutionArticle(uuid: $uuid) {
+    query: `query ugcArticleSolutionArticle($articleId: ID, $topicId: ID) {
+      ugcArticleSolutionArticle(articleId: $articleId, topicId: $topicId) {
         uuid
         title
         slug
@@ -34,7 +34,9 @@ export function createBody(topicId: string): Body {
         hasVideoArticle
         isSerialized
         isAuthorArticleReviewer
-        scoreInfo
+        scoreInfo {
+          scoreCoefficient
+        }
         topicId
         topic {
           id
@@ -76,9 +78,12 @@ export function createBody(topicId: string): Body {
         }
       }
     }`,
-    variables: { topicId }
+    variables: { 
+        topicId
+     }
   };
 }
+
 
 export interface Solution {
   data: {
