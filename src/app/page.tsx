@@ -1,11 +1,12 @@
 "use client";
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { useRef, useState } from "react";
 import { Question } from "@/lib/leetcode_graphql/get_user_solutions";
+
 
 export default function Page() {
     const inputRef = useRef<HTMLInputElement>(null);
     const [output, setOutput] = useState("");
-
     const [questions, setQuestions] = useState<Question[]>([]);
 
     async function onSubmit() {
@@ -50,33 +51,43 @@ export default function Page() {
                 setOutput("No solutions found for the given user.");
             }
         } catch (err) {
-            console.error("Error fetching user solutions:", err);
+            setOutput("Error fetching user solutions.");
         }
     }
 
     return (
-        <div>
-            <input type="text" ref={inputRef} />
-            <button onClick={onSubmit}>Get User Solutions</button>
-            {output && <pre>{output}</pre>}
-
-            <div>
-                {
-                    questions.map((question) => {
-                        return (
-                            <div key={question.uuid}>
-                                <h3>{question.title}</h3>
-                                <p>Topic ID: {question.topicId}</p>
-                                <p>Created At: {new Date(question.createdAt).toLocaleDateString()}</p>
-                                <p>Hit Count: {question.hitCount}</p>
-                                <p>Question Slug: {question.questionSlug}</p>
-                                <p>Question Title: {question.questionTitle}</p>
-                                <p>Reactions: {question.reactions.count} ({question.reactions.reactionType})</p>
-                            </div>
-                        );
-                    })
-                }
+        <div className="container justify-content-center">
+            <div className="row mt-3">
+                <div className="col">
+                    <input type="text" ref={inputRef} />
+                </div>            
+                <div className="col">
+                    <button onClick={onSubmit} className="">Get User Solutions</button>
+                </div> 
             </div>
+
+            {output 
+                && 
+                <div className="row mt-3">
+                    <pre>{output}</pre>
+                </div>
+            }
+            
+            <div className="row mt-3">
+                {questions.map((question) => (
+                    <div key={question.topicId} className="border border-2 border-dark rounded p-3 mb-3">
+                        <a
+                        href={`/solution?topicId=${question.topicId}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        >
+                            <h3>{question.questionTitle} - {question.title}</h3>
+                        </a>
+                    </div>
+                ))}
+            </div>
+
+
         </div>
     );
 }
