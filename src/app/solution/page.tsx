@@ -59,6 +59,8 @@ export default async function Page({ searchParams }: { searchParams: Promise<Sea
 
     // const question = await get_question(questionSlug);
 
+    const unescaped = solutionContent.replace(/\\n/g, '\n');
+
     return (
         <div className="container justify-content-center">
             <div className="row mt-3 mb-3">
@@ -75,7 +77,7 @@ export default async function Page({ searchParams }: { searchParams: Promise<Sea
             </div>
 
             <ReactMarkdown remarkPlugins={[remarkGfm]}>
-                {solutionContent}
+                {unescaped}
             </ReactMarkdown>
         </div>
     );
