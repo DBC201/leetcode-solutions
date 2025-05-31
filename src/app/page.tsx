@@ -57,12 +57,15 @@ export default function Page() {
 
     return (
         <div className="container justify-content-center">
-            <div className="row mt-3">
-                <div className="col">
-                    <input type="text" ref={inputRef} />
+            <div className="row justify-content-center align-items-center mt-3">
+                <div className="col-auto">
+                    <label htmlFor="username" className="form-label">Enter LeetCode Username:</label>
+                </div>
+                <div className="col-auto">
+                    <input type="text" ref={inputRef} className="form-control" defaultValue="dbc201" />
                 </div>            
-                <div className="col">
-                    <button onClick={onSubmit} className="">Get User Solutions</button>
+                <div className="col-auto">
+                    <button onClick={onSubmit} className="btn btn-primary">Get User Solutions</button>
                 </div> 
             </div>
 
