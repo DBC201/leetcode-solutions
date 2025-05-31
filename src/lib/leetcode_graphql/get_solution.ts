@@ -1,16 +1,16 @@
-import graphql_post_request from "./graphql_api";
+import {graphql_post_request} from "./graphql_api";
 
-interface BodyVariables {
+export interface BodyVariables {
   topicId: string;
 }
 
-interface Body {
+export interface Body {
   operationName: string;
   query: string;
   variables: BodyVariables;
 }
 
-function createBody(topicId: string): Body {
+export function createBody(topicId: string): Body {
   return {
     operationName: "ugcArticleSolutionArticle",
     query: `query ugcArticleSolutionArticle($uuid: String!) {
@@ -80,7 +80,7 @@ function createBody(topicId: string): Body {
   };
 }
 
-interface Solution {
+export interface Solution {
   data: {
     ugcArticleSolutionArticle: {
       uuid: string;
@@ -146,7 +146,7 @@ interface Solution {
   };
 };
 
-export default async function get_user_solution(topicId: string): Promise<Solution | null> {
+export async function get_solution(topicId: string): Promise<Solution | null> {
     const body = createBody(topicId);
     const raw = await graphql_post_request(JSON.stringify(body));
 

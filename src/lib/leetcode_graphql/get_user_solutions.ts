@@ -1,19 +1,19 @@
-import graphql_post_request from "./graphql_api";
+import {graphql_post_request} from "./graphql_api";
 
-interface BodyVariables {
+export interface BodyVariables {
   first: number;
   orderBy: string;
   skip: number;
   username: string;
 }
 
-interface Body {
+export interface Body {
   operationName: string;
   query: string;
   variables: BodyVariables;
 }
 
-function createBody(first: number, username: string): Body {
+export function createBody(first: number, username: string): Body {
     return {
         operationName: "ugcArticleUserSolutionArticles",
         query: `query ugcArticleUserSolutionArticles(
@@ -65,34 +65,34 @@ function createBody(first: number, username: string): Body {
     };
 }
 
-interface UserSolutions {
+export interface Question {
+    topicId: string;
+    uuid: string;
+    title: string;
+    slug: string;
+    createdAt: string;
+    hitCount: number;
+    questionSlug: string;
+    questionTitle: string;
+    reactions: {
+        count: number;
+        reactionType: string;
+    };
+};
+
+export interface UserSolutions {
     data: {
         ugcArticleUserSolutionArticles: {
             totalNum: number;
-        },
-        pageInfo: {
-            hasNextPage: boolean;
-        },
-        edges: Array<{
-            node: {
-                topicId: string;
-                uuid: string;
-                title: string;
-                slug: string;
-                createdAt: string;
-                hitCount: number;
-                questionSlug: string;
-                questionTitle: string;
-                reactions: {
-                    count: number;
-                    reactionType: string;
-                };
+            pageInfo: {
+                hasNextPage: boolean;
             };
-        }>;
-    }
+            edges: Array<Question>;
+        };
+    };
 };
 
-export default async function get_user_solutions(username: string): Promise<UserSolutions | null> {
+export async function get_user_solutions(username: string): Promise<UserSolutions | null> {
     const body = createBody(10000, username); // fetch all solutions at once
 
     const raw = await graphql_post_request(JSON.stringify(body));

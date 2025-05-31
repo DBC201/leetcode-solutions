@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import get_user_solutions from "@/lib/leetcode_graphql/get_user_solutions";
+import { get_user_solutions } from "@/lib/leetcode_graphql/get_user_solutions";
 
 export async function POST(request: Request) {
     const raw = await request.text();
